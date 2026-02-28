@@ -2,25 +2,25 @@ name: Gerar Executável Windows
 
 on:
   push:
-    branches: [ main ]  # Executa toda vez que você der "push" na branch main
+    branches: [ main ]
 
 jobs:
   build:
-    runs-on: windows-latest  # Aqui acontece a mágica: o GitHub abre um Windows
+    runs-on: windows-latest
 
     steps:
     - name: Baixar código do repositório
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4  # Atualizado de v3 para v4
 
     - name: Configurar Python
-      uses: actions/setup-python@v4
+      uses: actions/setup-python@v5 # Atualizado de v4 para v5
       with:
         python-version: '3.12'
 
     - name: Instalar bibliotecas
       run: |
         python -m pip install --upgrade pip
-        pip install customtkinter matplotlib  # Adicione aqui todas as suas bibliotecas
+        pip install customtkinter matplotlib 
 
     - name: Gerar .exe com PyInstaller
       run: |
@@ -28,7 +28,7 @@ jobs:
         pyinstaller --noconsole --onefile main.py
 
     - name: Guardar o executável
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4 # Atualizado de v3 para v4 (O erro estava aqui!)
       with:
         name: SistemaFinanceiro-Windows
         path: dist/main.exe
