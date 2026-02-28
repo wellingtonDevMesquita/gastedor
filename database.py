@@ -29,21 +29,18 @@ class BancoDados:
             query += " WHERE "
             filtros = []
             if ano and ano != "Todos":
-                filtros.append("data LIKE ?")
+                filtros.append("ano LIKE ?")
                 params.append(f"{ano}%")
             if mes and mes != "Todos":
                 # Mapeia nome do mês para número
-                meses_map = {
-                    "Janeiro": "01", "Fevereiro": "02", "Março": "03", "Abril": "04",
-                    "Maio": "05", "Junho": "06", "Julho": "07", "Agosto": "08",
-                    "Setembro": "09", "Outubro": "10", "Novembro": "11", "Dezembro": "12"
-                }
-                filtros.append("data LIKE ?")
-                params.append(f"%-{meses_map[mes]}-%")
+                print(mes)
+                filtros.append("mes LIKE ?")
+                params.append(f"%{mes}%")
             
             query += " AND ".join(filtros)
             
         query += " ORDER BY data DESC"
+        print("Query",query)
         self.cursor.execute(query, params)
        
         return self.cursor.fetchall()
