@@ -27,7 +27,7 @@ class FinanceiroApp(ctk.CTk):
         self.container.grid_rowconfigure(0, weight=1)
         self.container.grid_columnconfigure(0, weight=1)
 
-        self.show_frame("TelaCadastro")
+        self.show_frame("TelaLista")
 
     def show_frame(self, page_name):
         frame = self.frames[page_name]

@@ -6,7 +6,7 @@ class TelaLista(ctk.CTkFrame):
     def __init__(self, pai, controller):
         super().__init__(pai)
         self.controller = controller
-        print("teste")
+       
         # --- Cabeçalho e Filtros (já criados antes) ---
         self.header = ctk.CTkFrame(self, fg_color="transparent")
         self.header.pack(fill="x", padx=20, pady=7)
@@ -19,7 +19,11 @@ class TelaLista(ctk.CTkFrame):
         self.filtro_mes.pack(side="left", padx=7)
         self.filtro_ano = ctk.CTkComboBox(self.filtro_frame, values=["Todos", "2026", "2027", "2028"], command=self.filtrar)
         self.filtro_ano.pack(side="left", padx=7)
+        self.container_botao = ctk.CTkFrame(self, fg_color="transparent")
+        self.container_botao.pack(fill="x", padx=20)
 
+        self.btn_new = ctk.CTkButton(self.container_botao, text="Novo", command=self.novo_item)
+        self.btn_new.pack(pady=20,padx=20,side="right")
         # --- Layout de Dados ---
         # Dividimos a tela em duas partes: Lista em cima e Gráfico embaixo
         self.scroll = ctk.CTkScrollableFrame(self, height=200) # Altura menor para caber o gráfico
@@ -101,6 +105,12 @@ class TelaLista(ctk.CTkFrame):
         
         # Fecha a figura para liberar a memória do Python (RX 7600 agradece)
         plt.close(fig)
+
+
+
+    def novo_item(self):
+        self.controller.show_frame("TelaCadastro")
+
 
     def atualizar_lista(self):
         for widget in self.scroll.winfo_children():

@@ -50,5 +50,4 @@ class TelaCadastro(ctk.CTkFrame):
                 self.ano.get(),
                 datetime.now().strftime("%d/%m/%Y"))
         self.controller.db.salvar(dados)
-        print("passou")
         self.controller.show_frame("TelaLista")
